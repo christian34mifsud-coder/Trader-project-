@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Goalzone Video Text Studio</title>
+<style>
+:root {color-scheme:dark;--orange:#f47b32;--card:#20232b;--bg:#111319;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f2f3f7;font:15px/1.45 system-ui,Arial,sans-serif}header{max-width:1050px;margin:0 auto;padding:20px 16px 10px}h1{margin:0;font-size:clamp(22px,5vw,31px);letter-spacing:.3px}header p{margin:5px 0 0;color:#b8bcc9}.layout{max-width:1050px;margin:0 auto;padding:12px 16px 36px;display:grid;grid-template-columns:minmax(230px,380px) minmax(260px,1fr);gap:22px;align-items:start}.stage{aspect-ratio:9 / 16;max-height:78vh;position:relative;overflow:hidden;border:2px solid #484c58;background:linear-gradient(160deg,#273a46,#0c101c 70%);border-radius:16px;box-shadow:0 12px 35px #0008;isolation:isolate}.stage video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.stage .shade{position:absolute;inset:0;background:linear-gradient(transparent 25%,#0007 70%,#0008);pointer-events:none}.title{position:absolute;z-index:3;top:39%;left:5%;width:90%;min-height:80px;display:flex;align-items:center;justify-content:center;text-align:center;text-shadow:0 3px 12px #000b;font-size:clamp(30px,6vw,53px);line-height:1.02;font-weight:1000;letter-spacing:-1.5px;text-transform:uppercase;overflow-wrap:anywhere}.title em{font-style:normal;color:var(--orange)}.title.pop{animation:pop .24s cubic-bezier(.15,1.4,.38,1) both}.title span{display:inline}@keyframes pop{from{transform:scale(.68) translateY(16px);opacity:0;filter:blur(3px)}to{transform:scale(1);opacity:1;filter:blur(0)}}.caption{position:absolute;z-index:4;bottom:16%;left:8%;width:84%;font-weight:800;font-size:clamp(12px,2.5vw,20px);line-height:1.2;text-align:center;text-shadow:0 2px 4px black}.tag{position:absolute;z-index:3;bottom:5%;left:0;right:0;text-align:center;font-size:13px;font-weight:900;letter-spacing:3px;color:white;text-shadow:0 2px 5px black}.placeholder{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;text-align:center;padding:16px;z-index:0;color:#bfc7d3;top:12%;font-size:14px}.panel{background:var(--card);border:1px solid #383d48;border-radius:14px;padding:17px}.panel h2{font-size:18px;margin:0 0 12px}.field{margin:12px 0}.field label{display:block;margin-bottom:6px;font-weight:700}.field input[type=file]{max-width:100%;font-size:13px}.field textarea{background:#10131a;border:1px solid #626978;border-radius:9px;color:white;padding:12px;width:100%;min-height:232px;font:14px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical}.buttons{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:9px;padding:11px 13px;background:var(--orange);color:#161412;font-weight:900;cursor:pointer}.btn.secondary{background:#424956;color:#fff}.hint{font-size:13px;color:#bac2d1}.hint code{color:#ffe1a4}.status{font-size:13px;margin-top:12px;color:#a7e2be}input[type=range]{width:100%;accent-color:var(--orange)}.controls{padding:12px 0}.time{font-variant-numeric:tabular-nums;color:#c8cdda;font-size:12px;display:flex;justify-content:space-between}.note{max-width:1050px;margin:auto;padding:0 16px 25px;color:#c1c4cf;font-size:13px}@media(max-width:750px){.layout{grid-template-columns:1fr}.stage{width:min(100%,380px);margin:auto;max-height:none}.panel{max-width:500px;width:100%;margin:auto}}
+</style>
+</head>
+<body>
+<header><h1>⚽ Goalzone Video Text Studio</h1><p>A mobile-friendly preview of bold CapCut-style kinetic text. No account or PC required.</p></header>
+<main class="layout">
+ <section>
+  <div class="stage" id="stage">
+    <div class="placeholder" id="placeholder">Choose a video on the right to preview your words over your footage.</div>
+    <video id="video" playsinline preload="metadata"></video>
+    <div class="shade"></div><div id="title" class="title"></div>
+    <div class="caption" id="caption"></div><div class="tag">GOALZONE HEADLINES</div>
+  </div>
+  <div class="controls"><div class="time"><span id="current">00:00</span><span id="duration">00:00</span></div><input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek video"><div class="buttons"><button class="btn" id="play">▶ Play / Pause</button><button class="btn secondary" id="restart">↺ Restart</button></div></div>
+ </section>
+ <section class="panel">
+  <h2>1. Load your clip</h2>
+  <div class="field"><label for="file">Video from your phone / tablet</label><input id="file" type="file" accept="video/*"></div>
+  <h2>2. Edit on-screen words</h2>
+  <p class="hint">Each line: <code>second | BIG TITLE | smaller caption</code>. Surround important words with <code>[brackets]</code> to colour them orange.</p>
+  <div class="field"><textarea id="script" spellcheck="false">0.0 | [YOUR] NEXT GOAL | This is where the story begins
+1.6 | STARTS [HERE] | Watch what happens next
+3.1 | BIG [MOMENTS] | Every goal matters
+4.8 | [GOALZONE] HEADLINES | Where young talent shines
+6.7 | FOLLOW FOR [MORE] | Football. Talent. Passion.</textarea></div>
+  <div class="buttons"><button class="btn" id="apply">Apply text and timing</button><button class="btn secondary" id="sample">Reset sample</button></div>
+  <p class="status" id="status" aria-live="polite">Ready. Add a video, edit the script, then press Play.</p>
+  <h2 style="margin-top:23px">3. Save it to GitHub</h2>
+  <p class="hint">Upload this <code>index.html</code> file to a GitHub repository. For a shareable preview, enable GitHub Pages under Settings → Pages. Your chosen video stays only on your device; it is not uploaded to GitHub.</p>
+  <p class="hint"><strong>Important:</strong> This is a browser preview, not a CapCut project or an MP4 exporter. To create a finished video with the same style, reproduce these words and timing as text layers in CapCut.</p>
+ </section>
+</main>
+<div class="note">Tip: On a phone, landscape the screen or zoom out to edit the timing more easily. The preview is made for portrait videos (9:16).</div>
+<script>
+(()=>{
+const $=s=>document.querySelector(s),v=$('#video'),tit=$('#title'),cap=$('#caption'),seek=$('#seek'),txt=$('#script'),status=$('#status');
+const original=txt.value;let cues=[],last=-1,url=null;
+function safe(s){return s.replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function marked(s){return safe(s).replace(/\[([^\]]+)\]/g,'<em>$1</em>');}
+function parse(){const rows=[];const errors=[];txt.value.split('\n').forEach((line,i)=>{if(!line.trim())return;const parts=line.split('|');if(parts.length<2){errors.push(i+1);return;}const t=Number(parts[0].trim());if(!Number.isFinite(t)||t<0){errors.push(i+1);return;}rows.push({time:t,title:parts[1].trim(),caption:parts.slice(2).join('|').trim()});});if(errors.length){status.textContent='Check line(s): '+errors.join(', ')+'. Use: 0.0 | TITLE | caption';return false;}rows.sort((a,b)=>a.time-b.time);cues=rows;last=-1;render();status.textContent=`Applied ${cues.length} animated title(s).`;return true;}
+function clock(sec){const s=Math.max(0,Math.floor(sec||0));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+function render(){let idx=-1;for(let i=0;i<cues.length;i++){if(v.currentTime>=cues[i].time)idx=i;else break;}if(idx!==last){last=idx;const cue=cues[idx];tit.innerHTML=cue?marked(cue.title):'';cap.textContent=cue?cue.caption:'';tit.classList.remove('pop');void tit.offsetWidth;if(cue)tit.classList.add('pop');}$('#current').textContent=clock(v.currentTime);$('#duration').textContent=clock(v.duration);seek.value=v.duration?Math.round(v.currentTime/v.duration*1000):0;}
+$('#file').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(f);v.src=url;v.load();$('#placeholder').style.display='none';status.textContent='Loaded '+f.name+'. Video remains on this device.';last=-1;render();});
+$('#play').addEventListener('click',()=>{if(!v.src){status.textContent='Choose a video first.';return;}if(v.paused)v.play().catch(()=>status.textContent='Unable to play this file.');else v.pause();});
+$('#restart').addEventListener('click',()=>{v.pause();v.currentTime=0;last=-1;render();});
+$('#apply').addEventListener('click',parse);
+$('#sample').addEventListener('click',()=>{txt.value=original;parse();});
+seek.addEventListener('input',()=>{if(v.duration)v.currentTime=Number(seek.value)/1000*v.duration;render();});
+for(const event of ['timeupdate','loadedmetadata','seeked','ended'])v.addEventListener(event,render);
+parse();
+})();
+</script>
+</body>
+</html>
